@@ -1,0 +1,3 @@
+#!/bin/bash
+
+qsub -cwd -pe orte $2 -j y -N $1 ${*:3} /scripts/BAGEL.sh $1 $2

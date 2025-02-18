@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if ! [ $1 ]; then
+ echo "Submits a MOLCAS input file to a specified queue."
+ echo "Input method: submolcas jobname hostname nprocs mem"
+ echo "Example: submolcas molcas_input iam64 8 5000"
+ echo "It's a nice little script made by Khibus."
+ exit;
+fi
+
+if [ $3 ]; then
+ proc=$3
+else
+ proc=8
+fi
+
+if [ $2 ]; then
+ qsub -q $2 -pe orte $proc -cwd -j y -N $1 /scripts/molcas.sh $@
+else
+ qsub -q slave1,slave2,slave3,slave4 -pe orte $proc -cwd -j y -N $1 /scripts/molcas.sh $@
+fi
+

@@ -1,0 +1,7 @@
+sed -i '2ieval "$(/progs/miniconda3/bin/conda shell.bash hook)"' */run.sh
+sed -i '3iexport SHARC=/progs/sharc/bin' */run.sh
+sed -i '4iexport PATH=/progs2/orca6:/progs2/openmpi-4.1.6/bin:$PATH' */run.sh
+sed -i '5iexport OMP_NUM_THREADS=1' */run.sh
+sed -i '6iexport PATH=/home/debian/.local/bin:/scripts:/progs/sharc/bin:$PATH' */run.sh
+sed -i '7i. /progs/sharc/bin/sharcvars.sh' */run.sh
+sed -i '8iexport LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/progs2/openmpi-4.1.6/lib:$LD_LIBRARY_PATH' */run.sh

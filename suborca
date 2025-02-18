@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#Trim off '.inp' if the name of the job is given in such form
+inp_name=`echo $1| sed 's/\.inp$//'`
+
+# Note that a line with % pal nproc is expected in the input file
+proc=`grep -m 1 nproc $inp_name.inp | cut -f 3 -d " "`
+
+if [ $2 ]; then
+qsub -q $2 -pe orte $proc -cwd -j y -N $inp_name /scripts/ORCA.sh $inp_name
+else
+qsub -cwd -pe orte $proc -j y -N $inp_name /scripts/ORCA.sh $inp_name
+fi
